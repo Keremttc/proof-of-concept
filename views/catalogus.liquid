@@ -1,0 +1,45 @@
+{% render 'partials/head.liquid' %}
+
+<section class="filter-navigation">
+    <form method="GET" role="search" aria-label="Publicatie filteren">
+        <div class="search-bar">
+            <label for="search" class="visually-hidden">Zoekterm</label>
+            <input id="search" type="search" name="q" placeholder="Zoek hier..." aria-label="Zoek in catalogus">
+            <button type="submit" aria-label="Zoeken">
+                <img src="/assets/search.svg" alt="Zoek icoon">
+            </button>
+        </div>
+
+        <label for="author" class="visually-hidden">Filter op auteur</label>
+        <select id="author" name="author" class="auteur">
+            <option value="">Auteur</option>
+        </select>
+
+        <label for="place" class="visually-hidden">Filter op plaats</label>
+        <select id="place" name="place" class="place">
+            <option value="">Plaats</option>
+        </select>
+
+        <label for="year" class="visually-hidden">Filter op jaar</label>
+        <input id="year" type="range" name="year" min="1400" max="2100" step="1" aria-label="Filter op jaar">
+
+        <label for="digital" class="visually-hidden">Gedigitaliseerde publicaties</label>
+        <select id="digital" name="digital" class="digital">
+            <option value="">Gedigitaliseerde publicaties</option>
+        </select>
+    </form>
+</section>
+
+<section class="book-list">
+    {% for data in algemeen %}
+        <article class="book-info">
+            <h2>{{ data.title }}</h2>
+            <img src="{{ data.asset.small }}" alt="Boekcover van {{ data.title }}" loading="lazy">
+            <p>Uitgever: {{ data.metadata.2.value.0 }}</p>
+            <p>Jaar: {{ data.metadata.4.value }}</p>
+            <p>Plaats: {{ data.metadata.3.value }}</p>
+        </article>
+    {% endfor %}
+</section>
+
+{% render 'partials/footer.liquid' %}
