@@ -1,0 +1,31 @@
+/* Kerem's variables */
+:root {
+    --color-main: #002646;
+    --color-secondary: #C4A356;
+    --color-extra: #D7D1C5;
+    --color-creme: #EEEBE3;
+    --color-black: #000000;
+
+    /* Font-weights */
+    --font-weight-thin: 100;
+    --font-weight-extra-light: 200;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semi-bold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extra-bold: 800;
+    --font-weight-black: 900;
+
+    --border-bigCard: 2em;
+    --border-card: 1.0625em;
+
+    --section-padding-y: 4rem;
+    --section-padding-x: 7.5rem;
+
+    --line-height-paragraph: 1.8em;
+    --line-height-paragraph-big-screen: 3em;
+
+    --image-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    --radius:1rem;
+}
