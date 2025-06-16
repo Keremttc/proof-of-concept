@@ -1,18 +1,14 @@
 {% render 'partials/head.liquid' %}
-
 {% render 'partials/nav.liquid' %}
 
-
 <section class="filter-navigation">
-  <form method="GET" role="search" aria-label="Publicatie filteren">
+  <form method="POST" action="/search" role="search" aria-label="Publicatie filteren">
     <div class="searchBox hidden">
-  <input class="searchInput" type="search" name="q" placeholder="Zoek hier..." aria-label="Zoek in catalogus">
-  <button type="submit" class="searchButton" aria-label="Zoeken">
-    <img src="/assets/search.svg" alt="Zoek icoon">
-  </button>
-</div>
-
-
+      <input class="searchInput" type="search" name="zoekterm" placeholder="Zoek hier..." aria-label="Zoek in catalogus">
+      <button type="submit" class="searchButton" aria-label="Zoeken">
+        <img src="/assets/search.svg" alt="Zoek icoon">
+      </button>
+    </div>
 
     <div class="filters">
       <label for="place" class="visually-hidden">Filter op plaats</label>
@@ -38,24 +34,32 @@
   </form>
 </section>
 
+{% comment %} {% if zoekterm %}
+  <h2>Zoekresultaten voor: "{{ zoekterm }}"</h2>
+{% endif %} {% endcomment %}
 
 <section class="book-list">
-    {% for data in algemeen %}
-        <article class="book-info">
-            <h2>{{ data.title }}</h2>
-            <img src="{{ data.asset.small }}" alt="Boekcover van {{ data.title }}" loading="lazy">
-            <p>Uitgever: {{ data.metadata.2.value.0 }}</p>
-            <p>Jaar: {{ data.metadata.4.value }}</p>
-            <p>Plaats: {{ data.metadata.3.value }}</p>
-        </article>
-    {% endfor %}
+  {% for data in algemeen %}
+    <article class="book-info">
+      <a href="/detail/{{ data.id }}" class="book-cover-link">
+        <img src="{{ data.asset.small }}" alt="Boekcover van {{ data.title }}" loading="lazy">
+      </a>
+      <div class="book-details">
+        <h2>{{ data.title }}</h2>
+        <p>Uitgever: {{ data.metadata.2.value.0 }}</p>
+        <p>Jaar: {{ data.metadata.4.value }}</p>
+        <p>Plaats: {{ data.metadata.3.value }}</p>
+        <a href="/detail/{{ data.id }}" class="book-button">Bekijk boek</a>
+      </div>
+    </article>
+  {% endfor %}
 </section>
 
 <script>
   const searchInput = document.querySelector('.searchInput');
   const bookItems = document.querySelectorAll('.book-info');
 
-  searchInput.addEventListener('input', () => {
+  searchInput?.addEventListener('input', () => {
     const filter = searchInput.value.toLowerCase();
     bookItems.forEach(book => {
       const title = book.querySelector('h2').textContent.toLowerCase();
@@ -68,6 +72,4 @@
   });
 </script>
 
-
 {% render 'partials/footer.liquid' %}
-
