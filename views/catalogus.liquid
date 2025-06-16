@@ -55,21 +55,7 @@
   {% endfor %}
 </section>
 
-<script>
-  const searchInput = document.querySelector('.searchInput');
-  const bookItems = document.querySelectorAll('.book-info');
 
-  searchInput?.addEventListener('input', () => {
-    const filter = searchInput.value.toLowerCase();
-    bookItems.forEach(book => {
-      const title = book.querySelector('h2').textContent.toLowerCase();
-      if (title.includes(filter)) {
-        book.style.display = '';
-      } else {
-        book.style.display = 'none';
-      }
-    });
-  });
-</script>
+
 
 {% render 'partials/footer.liquid' %}
