@@ -1,0 +1,120 @@
+{% render 'partials/head.liquid' %}
+{% render 'partials/nav.liquid' %}
+
+
+
+        <nav class="detail-nav">
+            <ul>
+                <li>
+                    <a href="/">terug</a>
+                </li>
+                <li>
+                    <button class="detail-info">Info</button>
+                </li>
+                <li>
+                    <button class="detail-reactions">Reactie</button>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="detail-book-info">
+            <h1>informatie</h1>
+
+            <h2>titel</h2>
+            <p>{{ detail.title }}</p>
+
+            <h2>auteur</h2>
+            <p>{{ detail.metadata.2.value }}</p>
+
+            <h2>jaar</h2>
+            <p>{{ detail.metadata.4.value }}</p>
+
+            <h2>uitgave</h2>
+            <p>{{ detail.metadata.3.value }}</p>
+
+            <h2>UBN</h2>
+            <p>{{ detail.metadata.0.value }}</p>
+
+            <h2>trefwoorden</h2>
+            <p> {{ detail.metadata.6.value }}</p>
+
+            <h2>signatuur</h2>
+            <p> {{ detail.metadata.5.value }}</p>
+
+            <h2>opmerkingen</h2>
+            <p> {{ detail.metadata.8.value }}</p>
+
+            <h2>kopieën</h2>
+            <p> {{ detail.metadata.9.value }}</p>
+
+            <h2>BPH State Collection shelf mark</h2>
+            <p> {{ detail.metadata.11.value }}</p>
+
+            <h2>status</h2>
+            <p> {{ detail.metadata.10.value }}</p>
+        </section>
+
+        <section class="detail-book-reaction">
+            <h1>Reacties</h1>
+
+            <form action="post">
+                <label for="name">naam</label>
+                <input type="text" placeholder="vul hier je naam in">
+
+                <label for="email">email</label>
+                <input type="email" placeholder="vul hier je email in">
+
+                <label for="reactie">reactie</label>
+                {% comment %} <input type="textarea" placeholder="vul hier je reactie in"> {% endcomment %}
+                <textarea placeholder="vul hier je text in"></textarea>
+
+                <input type="submit" placeholder="reactie versturen">
+            </form>
+        </section>
+
+        <section class="book-carrousel">
+            <div class="slider-container">
+                {% for asset in detail.assets %}
+
+                    <img src="{{ asset.medium }}" class="slider-image" alt="Book Image">
+
+                {% endfor %}
+            </div>
+            <button class="slider-button-prev">❮</button>
+            <button class="slider-button-next">❯</button>
+        </section>
+    </section>
+
+<script>
+
+// information 
+
+const infoButton = document.querySelector(".detail-info");
+
+infoButton.addEventListener("click", openInfo);
+
+
+function openInfo() {  
+
+  const infoNav = document.querySelector(".detail-book-info");
+
+  infoNav.classList.toggle("detail-book-info-open");}
+
+
+// reaction 
+
+const ReaButton = document.querySelector(".detail-reactions");
+
+ReaButton.addEventListener("click", openRea);
+
+
+function openRea() {  
+
+  const ReaNav = document.querySelector(".detail-book-reaction");
+
+  ReaNav.classList.toggle("detail-book-reaction-open");}
+
+</script>
+
+
+{% render 'partials/footer.liquid' %}
