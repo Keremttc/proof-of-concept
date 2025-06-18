@@ -1,0 +1,71 @@
+/* ==== HEADER STYLING ==== */
+header {
+    position: relative;
+    background-image: url('/assets/header-pic.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--color-creme);
+  }
+  
+  .upper-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background-color: var(--color-creme);
+  }
+  
+  .logo-container img {
+    height: 50px;
+    width: auto;
+  }
+  
+  .hero {
+    position: relative;
+    background-image: url('/assets/header-pic.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    color: var(--color-creme);
+    z-index: 1;
+    overflow: hidden;
+    transition: min-height 0.5s ease, padding 0.5s ease;
+  }
+  
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+  
+  .hero h1 {
+    font-size: clamp(1.5rem, 3vw + 1rem, 2.8rem);
+    font-weight: var(--font-weight-semi-bold);
+    margin: 0;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    transition: font-size 0.5s ease;
+  }
+  
+  @media (min-width: 768px) {
+    .hero {
+        min-height: 60vh;
+        padding: 2.5rem 3rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .hero {
+        min-height: 45vh;
+        padding: 2rem 3rem;
+    }
+  }
+  
