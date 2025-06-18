@@ -2,7 +2,6 @@
 {% render 'partials/nav.liquid' %}
 
 <div class="detail-layout">
-  
   <!-- Linker kolom: Boek info -->
   <section class="left-column detail-box" aria-label="Boek informatie">
     <h1>Informatie</h1>
@@ -10,47 +9,16 @@
     <p>{{ detail.title | default: 'Geen titel beschikbaar' }}</p>
 
     {% assign md = detail.metadata %}
-
-    {% if md[2] and md[2].value %}
-      <h2>Auteur</h2>
-      <p>{{ md[2].value }}</p>
-    {% endif %}
-    {% if md[4] and md[4].value %}
-      <h2>Jaar</h2>
-      <p>{{ md[4].value }}</p>
-    {% endif %}
-    {% if md[3] and md[3].value %}
-      <h2>Uitgave</h2>
-      <p>{{ md[3].value }}</p>
-    {% endif %}
-    {% if md[0] and md[0].value %}
-      <h2>UBN</h2>
-      <p>{{ md[0].value }}</p>
-    {% endif %}
-    {% if md[6] and md[6].value %}
-      <h2>Trefwoorden</h2>
-      <p>{{ md[6].value }}</p>
-    {% endif %}
-    {% if md[5] and md[5].value %}
-      <h2>Signatuur</h2>
-      <p>{{ md[5].value }}</p>
-    {% endif %}
-    {% if md[8] and md[8].value %}
-      <h2>Opmerkingen</h2>
-      <p>{{ md[8].value }}</p>
-    {% endif %}
-    {% if md[9] and md[9].value %}
-      <h2>Kopieën</h2>
-      <p>{{ md[9].value }}</p>
-    {% endif %}
-    {% if md[11] and md[11].value %}
-      <h2>BPH State Collection shelf mark</h2>
-      <p>{{ md[11].value }}</p>
-    {% endif %}
-    {% if md[10] and md[10].value %}
-      <h2>Status</h2>
-      <p>{{ md[10].value }}</p>
-    {% endif %}
+    {% if md[2] and md[2].value %}<h2>Auteur</h2><p>{{ md[2].value }}</p>{% endif %}
+    {% if md[4] and md[4].value %}<h2>Jaar</h2><p>{{ md[4].value }}</p>{% endif %}
+    {% if md[3] and md[3].value %}<h2>Uitgave</h2><p>{{ md[3].value }}</p>{% endif %}
+    {% if md[0] and md[0].value %}<h2>UBN</h2><p>{{ md[0].value }}</p>{% endif %}
+    {% if md[6] and md[6].value %}<h2>Trefwoorden</h2><p>{{ md[6].value }}</p>{% endif %}
+    {% if md[5] and md[5].value %}<h2>Signatuur</h2><p>{{ md[5].value }}</p>{% endif %}
+    {% if md[8] and md[8].value %}<h2>Opmerkingen</h2><p>{{ md[8].value }}</p>{% endif %}
+    {% if md[9] and md[9].value %}<h2>Kopieën</h2><p>{{ md[9].value }}</p>{% endif %}
+    {% if md[11] and md[11].value %}<h2>BPH State Collection shelf mark</h2><p>{{ md[11].value }}</p>{% endif %}
+    {% if md[10] and md[10].value %}<h2>Status</h2><p>{{ md[10].value }}</p>{% endif %}
   </section>
 
   <!-- Midden kolom: Reactie formulier + reacties -->
@@ -58,10 +26,10 @@
     <h2>Laat een reactie achter</h2>
     <form id="reactieForm" method="POST" action="/detail/{{ detail.id }}">
       <label for="name">Naam</label>
-      <input type="text" id="name" name="name" placeholder="Vul je naam in" required>
+      <input type="text" id="name" name="name" required>
 
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Vul je email in" required>
+      <input type="email" id="email" name="email" required>
 
       <label for="reactie">Reactie</label>
       <textarea name="reactie" id="reactie" required></textarea>
@@ -69,11 +37,8 @@
       <button type="submit">Verstuur</button>
     </form>
 
-    <!-- Reacties staan nu direct hier onder -->
     <h2>Reacties</h2>
-    <ul id="reacties">
-      <!-- Reacties worden hier via JS geladen -->
-    </ul>
+    <ul id="reacties" aria-live="polite"></ul>
   </section>
 
   <!-- Rechter kolom: Carrousel -->
@@ -88,134 +53,113 @@
       <button class="carousel-button next" aria-label="Volgende afbeelding">&gt;</button>
     </div>
   </section>
-
 </div>
+
+<!-- Overlay en succesmelding -->
+<div id="overlay" style="display:none;">
+  <div class="blur-background"></div>
+  <div class="loader-circle" aria-label="Bezig met verzenden"></div>
+</div>
+
+<div id="success-popup" style="display:none;">✅ Reactie succesvol verzonden!</div>
 
 {% render 'partials/footer.liquid' %}
 
 <script>
-
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Script geladen, DOMContentLoaded");
-
+  // Reacties ophalen
   function laadReacties() {
-    console.log("Reacties laden gestart...");
     fetch("https://fdnd.directus.app/items/messages?filter[for][_eq]=boek_{{ detail.id }}")
-      .then(response => {
-        if (!response.ok) throw new Error("Network response was not ok");
-        return response.json();
-      })
+      .then(res => res.json())
       .then(data => {
-        console.log("Reacties data ontvangen:", data);
-        const reactiesElement = document.getElementById("reacties");
-        reactiesElement.innerHTML = "";
-
+        const ul = document.getElementById("reacties");
+        ul.innerHTML = "";
         if (data.data && data.data.length > 0) {
           data.data.forEach(item => {
             const tekst = item.text || "";
-            // Pak naam, email en reactie uit text via simpele regex
-            const naamMatch = tekst.match(/Naam:\s*(.*)/);
-            const emailMatch = tekst.match(/Email:\s*(.*)/);
-            const reactieMatch = tekst.match(/Reactie:\s*([\s\S]*)/);
-
-            const naam = naamMatch ? naamMatch[1] : "Onbekend";
-            const email = emailMatch ? emailMatch[1] : "geen email";
-            const reactie = reactieMatch ? reactieMatch[1] : tekst;
-
-            const li = document.createElement("li");
-            li.innerHTML = `<strong>${naam}</strong> (${email}):<br>${reactie}`;
-            reactiesElement.appendChild(li);
+            const naam = (tekst.match(/Naam:\s*(.*)/) || [])[1] || "Onbekend";
+            const email = (tekst.match(/Email:\s*(.*)/) || [])[1] || "geen email";
+            const reactie = (tekst.match(/Reactie:\s*([\s\S]*)/) || [])[1] || tekst;
+            ul.innerHTML += `<li><strong>${naam}</strong> (${email}):<br>${reactie}</li>`;
           });
         } else {
-          reactiesElement.innerHTML = "<li>Er zijn nog geen reacties.</li>";
+          ul.innerHTML = "<li>Er zijn nog geen reacties.</li>";
         }
-      })
-      .catch(error => {
-        console.error("Fout bij ophalen reacties:", error);
       });
   }
 
   laadReacties();
 
+  // Formulier verzenden
   const form = document.getElementById("reactieForm");
-  console.log("Form gevonden:", form);
-
   form.addEventListener("submit", function(e) {
     e.preventDefault();
 
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const reactie = form.reactie.value.trim();
+    if (!name || !email || !reactie) return alert("Vul alle velden in.");
 
-    console.log("Formulier submit: ", { name, email, reactie });
-
-    if (!name || !email || !reactie) {
-      alert("Vul alle velden in.");
-      return;
-    }
-
-    // Verstuur als één tekstveld
     const textToSend = `Naam: ${name}\nEmail: ${email}\nReactie: ${reactie}`;
+    const overlay = document.getElementById("overlay");
+    const successPopup = document.getElementById("success-popup");
+
+    overlay.style.display = "flex";
+    const start = Date.now();
 
     fetch("https://fdnd.directus.app/items/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        for: `boek_{{ detail.id }}`,
-        text: textToSend
-      })
+      body: JSON.stringify({ for: `boek_{{ detail.id }}`, text: textToSend })
     })
     .then(response => {
-      console.log("Response POST:", response);
-      if (response.ok) {
-        alert("Reactie succesvol verzonden!");
-        form.reset();
-        laadReacties();
-      } else {
-        alert("Er ging iets mis bij het verzenden.");
-      }
+      const timePassed = Date.now() - start;
+      const delay = Math.max(0, 1000 - timePassed); // minimaal 1 sec
+
+      setTimeout(() => {
+        overlay.style.display = "none";
+        if (response.ok) {
+          form.reset();
+          laadReacties();
+          successPopup.style.display = "block";
+          successPopup.classList.add("show");
+          setTimeout(() => {
+            successPopup.classList.remove("show");
+            successPopup.style.display = "none";
+          }, 3000);
+        } else {
+          alert("Er ging iets mis.");
+        }
+      }, delay);
     })
-    .catch(error => {
-      console.error("Fout bij verzenden:", error);
+    .catch(() => {
+      overlay.style.display = "none";
       alert("Verbinding mislukt.");
     });
   });
 
-  // *** Carousel code, ongewijzigd toevoegen hieronder ***
-
-  const sliderWrapper = document.querySelector(".slider-wrapper");
+  // Carousel functionaliteit
+  const wrapper = document.querySelector(".slider-wrapper");
   const slides = document.querySelectorAll(".slider-image");
-  const prevBtn = document.querySelector(".carousel-button.prev");
-  const nextBtn = document.querySelector(".carousel-button.next");
+  const prev = document.querySelector(".carousel-button.prev");
+  const next = document.querySelector(".carousel-button.next");
+  let index = 0;
 
-  console.log("Slider wrapper:", sliderWrapper);
-  console.log("Slides aantal:", slides.length);
-  console.log("Prev knop:", prevBtn);
-  console.log("Next knop:", nextBtn);
+  function updateSlider() {
+    wrapper.style.transform = `translateX(-${index * slides[0].clientWidth}px)`;
+  }
 
-  if (sliderWrapper && slides.length > 0 && prevBtn && nextBtn) {
-    let currentIndex = 0;
-
-    function updateSlider() {
-      const width = slides[0].clientWidth;
-      sliderWrapper.style.transform = `translateX(-${currentIndex * width}px)`;
-      console.log("Slider updated to index:", currentIndex);
-    }
-
-    prevBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  if (slides.length > 0) {
+    prev.addEventListener("click", () => {
+      index = (index - 1 + slides.length) % slides.length;
       updateSlider();
     });
-
-    nextBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % slides.length;
+    next.addEventListener("click", () => {
+      index = (index + 1) % slides.length;
       updateSlider();
     });
-
     window.addEventListener("resize", updateSlider);
     updateSlider();
   }
-
 });
 </script>
-
