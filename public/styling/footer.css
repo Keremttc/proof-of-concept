@@ -1,0 +1,60 @@
+/* =========================
+   Footer Styling
+   ========================= */
+
+   .footer {
+    background-color: var(--color-creme);
+    color: var(--color-main);
+    padding: 2rem 1rem;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+  }
+  
+  .footer a {
+    color: var(--color-main);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  
+  .footer a:hover {
+    color: var(--color-secondary);
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-section {
+    max-width: 300px;
+  }
+  
+  .footer-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-main);
+  }
+  
+  .footer-section address {
+    font-style: normal;
+    line-height: 1.6;
+  }
+  
+  /* Footer responsief naast elkaar op grotere schermen */
+  @media (min-width: 768px) {
+    .footer-content {
+      flex-direction: row;
+      justify-content: center;
+      text-align: left;
+    }
+  
+    .footer-section {
+      max-width: none;
+      padding: 0 2rem;
+    }
+  }
+  
