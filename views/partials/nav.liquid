@@ -1,66 +1,65 @@
 <header>
-  <!-- Logo en menuknop -->
+  <!-- Bovenste gedeelte: logo en menu-knop -->
   <div class="upper-header">
     <div class="logo-container">
       <a href="/" aria-label="Ga naar de homepagina">
-        <img src="/assets/logo.png" alt="logo">
+        <img src="/assets/logo.png" alt="Logo van de website">
       </a>
     </div>
 
-    <button class="nav-menu">
-      <img src="" alt="">
+    <button class="nav-menu" aria-label="Open navigatiemenu">
+      <img src="/assets/menu-icon.svg" alt="">
     </button>
   </div>
-  
 
   <!-- Hero sectie met titel -->
   <section class="hero">
     <h1>Online Catalog</h1>
   </section>
 
-  <!-- Navigatie menu -->
-  <nav class="header-nav">
+  <!-- Hoofd navigatie -->
+  <nav class="header-nav" aria-label="Hoofdnavigatie">
     <ul>
       <li>
-        <button>embassy</button>
-        <ul>
-          <li><a href="#">embassy</a></li>
-          <li><a href="#">over embassy</a></li>
-          <li><a href="#">organisatie</a></li>
-          <li><a href="#">evenementen locatie</a></li>
-          <li><a href="#">steun ons</a></li>
-          <li><a href="#">nieuws</a></li>
-          <li><a href="#">partners</a></li>
+        <button aria-expanded="false" aria-controls="menu-embassy">Embassy</button>
+        <ul id="menu-embassy">
+          <li><a href="#">Embassy</a></li>
+          <li><a href="#">Over Embassy</a></li>
+          <li><a href="#">Organisatie</a></li>
+          <li><a href="#">Evenementenlocatie</a></li>
+          <li><a href="#">Steun ons</a></li>
+          <li><a href="#">Nieuws</a></li>
+          <li><a href="#">Partners</a></li>
         </ul>
       </li>
       <li>
-        <button>collectie</button>
-        <ul>
-          <li><a href="#">collectie</a></li>
-          <li><a href="#">online catalogus</a></li>
-          <li><a href="#">digitale collectie</a></li>
-          <li><a href="#">world of the free mind</a></li>
-          <li><a href="#">verzamelgebieden</a></li>
-          <li><a href="#">over de bibliotheek</a></li>
+        <button aria-expanded="false" aria-controls="menu-collectie">Collectie</button>
+        <ul id="menu-collectie">
+          <li><a href="#">Collectie</a></li>
+          <li><a href="#">Online Catalogus</a></li>
+          <li><a href="#">Digitale Collectie</a></li>
+          <li><a href="#">World of the Free Mind</a></li>
+          <li><a href="#">Verzamelgebieden</a></li>
+          <li><a href="#">Over de Bibliotheek</a></li>
         </ul>
       </li>
       <li>
-        <button>museum</button>
-        <ul>
-          <li><a href="#">museum</a></li>
-          <li><a href="#">webshop</a></li>
-          <li><a href="#">openingstijden, prijzen & locatie</a></li>
-          <li><a href="#">tentoonstellingen</a></li>
-          <li><a href="#">agenda</a></li>
-          <li><a href="#">over het museum</a></li>
-          <li><a href="#">kidspagina</a></li>
+        <button aria-expanded="false" aria-controls="menu-museum">Museum</button>
+        <ul id="menu-museum">
+          <li><a href="#">Museum</a></li>
+          <li><a href="#">Webshop</a></li>
+          <li><a href="#">Openingstijden, Prijzen & Locatie</a></li>
+          <li><a href="#">Tentoonstellingen</a></li>
+          <li><a href="#">Agenda</a></li>
+          <li><a href="#">Over het Museum</a></li>
+          <li><a href="#">Kidspagina</a></li>
         </ul>
       </li>
       <li>
-        <button>onderzoek</button>
-        <ul>
-          <li><a href="#">onderzoek</a></li>
-          <li><a href="#">archief activiteiten</a></li>
+        <button aria-expanded="false" aria-controls="menu-onderzoek">Onderzoek</button>
+        <ul id="menu-onderzoek">
+          <li><a href="#">Onderzoek</a></li>
+          <li><a href="#">Archief Activiteiten</a></li>
         </ul>
       </li>
     </ul>
