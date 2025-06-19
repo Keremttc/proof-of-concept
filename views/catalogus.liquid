@@ -34,9 +34,7 @@
   </form>
 </section>
 
-{% comment %} {% if zoekterm %}
-  <h2>Zoekresultaten voor: "{{ zoekterm }}"</h2>
-{% endif %} {% endcomment %}
+
 
 <section class="book-list">
   {% for data in algemeen %}
@@ -49,11 +47,38 @@
         <p>Uitgever: {{ data.metadata.2.value.0 }}</p>
         <p>Jaar: {{ data.metadata.4.value }}</p>
         <p>Plaats: {{ data.metadata.3.value }}</p>
-        <a href="/detail/{{ data.id }}" class="book-button">Bekijk boek</a>
+        <a href="/detail/{{ data.id }}" class="book-button magnetic-button">Bekijk boek</a>
       </div>
     </article>
   {% endfor %}
 </section>
+
+
+<script>
+  // Zoek alle elementen met de class 'magnetic-button'
+  document.querySelectorAll('.magnetic-button').forEach(btn => {
+
+    // Wanneer de muis over de knop beweegt...
+    btn.addEventListener('mousemove', e => {
+
+      // Haal de positie en afmetingen van de knop op
+      const { left, top, width, height } = btn.getBoundingClientRect();
+
+      // Bereken hoe ver de muis zich van het midden van de knop bevindt
+      const x = (e.clientX - left - width / 2) * 0.2; // horizontale offset (20%)
+      const y = (e.clientY - top - height / 2) * 0.2; // verticale offset (20%)
+
+      // Verplaats de knop een beetje in de richting van de muis en vergroot hem licht
+      btn.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+    });
+
+    // Wanneer de muis de knop verlaat...
+    btn.addEventListener('mouseleave', () => {
+      // Zet de knop terug naar de oorspronkelijke positie en grootte
+      btn.style.transform = 'translate(0, 0) scale(1)';
+    });
+  });
+</script>
 
 
 
