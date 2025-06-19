@@ -1,388 +1,199 @@
-/* =========================
-   Catalogus Pagina Styling
-   ========================= */
-
-/* Basis layout - Mobile First */
-.detail-layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--color-main);
-  padding: 1rem 1.5rem;
-  gap: 1.2rem;
-  font-family: 'Poppins', sans-serif;
-  color: var(--color-creme);
-  transition: padding 0.4s ease;
-}
-
-/* --------------------------
-   Carrousel
--------------------------- */
-.book-carrousel {
-  order: 0;  /* Carrousel eerst op mobiel */
-  background-color: var(--color-creme);;
-  border: 5px solid var(--color-secondary);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-  max-height: 55vh;
-  overflow: hidden;
-  margin: 0 auto;
-  width: 100%;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.slider-container {
+/* ================================
+   SEARCHBOX STATES
+================================== */
+.searchBox {
   position: relative;
-  overflow: hidden;
-  max-width: 100%;
-  height: 100%;
-  border-radius: 14px;
-}
-
-.slider-wrapper {
+  background-color: var(--color-creme);
+  border: 2px solid transparent;
+  height: 40px;
+  border-radius: 40px;
+  padding: 0 10px;
   display: flex;
-  transition: transform 0.45s ease-in-out;
-  height: 100%;
-  max-height: 420px;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.slider-image {
-  min-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 14px;
-  user-select: none;
+.searchBox.open {
+  background-color: #cce4ff;
+  border-color: #3399ff;
 }
 
-/* Navigatieknoppen */
-.carousel-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+.searchBox.typing {
+  background-color: var(--color-creme);
+  border-color: #666;
+}
+
+/* Input binnen searchBox */
+.searchBox.open > .searchInput,
+.searchBox.typing > .searchInput {
+  width: 150px; 
+  padding: 0 6px;
+  transition: width 0.4s ease, padding 0.4s ease;
+}
+
+/* ================================
+   SEARCH INPUT
+================================== */
+.searchInput {
   border: none;
-  color: var(--color-creme);
-  font-size: 1.5rem;
-  width: 2.8rem;
-  height: 2.8rem;
-  cursor: pointer;
+  background: none;
+  outline: none;
+  padding: 0 6px;
+  color: var(--color-main);
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  line-height: 40px;
+  width: 150px; 
+  flex-shrink: 1;
+  transition: width 0.4s ease, padding 0.4s ease;
+}
+
+/* ================================
+   SEARCH BUTTON
+================================== */
+.searchButton {
+  color: white;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  z-index: 15;
-}
-
-.carousel-button.prev { left: 0.8rem; }
-.carousel-button.next { right: 0.8rem; }
-
-/* --------------------------
-   Kolommen
--------------------------- */
-.left-column.detail-box {
-  order: 1; /* Na carrousel op mobiel */
-  background-color: var(--color-creme);
-  color: var(--color-main);
-  padding: 1.8rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);
-  box-sizing: border-box;
-  overflow-y: auto;
-  max-height: 45vh;
-  border: 5px solid var(--color-secondary);
+  background: var(--color-secondary);
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  line-height: 1.6;
-}
-
-.middle-column.detail-box {
-  order: 2; /* Na linker kolom op mobiel */
-  background-color: var(--color-creme);
-  color: var(--color-main);
-  padding: 1.8rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);
-  box-sizing: border-box;
-  overflow-y: auto;
-  max-height: 45vh;
-  border: 5px solid var(--color-secondary);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  line-height: 1.6;
-}
-
-.left-column.detail-box h3,
-.middle-column.detail-box h3 {
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-/* Scrollbars */
-.left-column.detail-box::-webkit-scrollbar,
-.middle-column.detail-box::-webkit-scrollbar {
-  width: 6px;
-}
-
-.left-column.detail-box::-webkit-scrollbar-thumb,
-.middle-column.detail-box::-webkit-scrollbar-thumb {
-  background-color: rgba(128, 128, 128, 0.5);
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.left-column.detail-box:hover::-webkit-scrollbar-thumb,
-.middle-column.detail-box:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(128, 128, 128, 0.8);
-}
-
-.left-column.detail-box,
-.middle-column.detail-box {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(128, 128, 128, 0.5) transparent;
-}
-
-.left-column.detail-box:hover,
-.middle-column.detail-box:hover {
-  scrollbar-color: rgba(128, 128, 128, 0.8) transparent;
-}
-
-/* --------------------------
-   Knoppen
--------------------------- */
-.detail-layout button,
-.detail-layout .book-button,
-.detail-layout form button[type="submit"] {
-  background-color: var(--color-main);
-  color: var(--color-secondary);
-  border: none;
-  border-radius: 8px;
-  padding: 0.55rem 1.25rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.detail-layout form button[type="submit"] {
-  background-color: var(--color-main);
-  color: var(--color-secondary);
-  border: none;
-  border-radius: 14px;
-  padding: 0.7rem 2rem;
-  font-weight: 700;
-  font-size: 1.1rem;
-  font-family: inherit;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.detail-layout form button[type="submit"]:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-main);
-}
-
-/* --------------------------
-   Formulier
--------------------------- */
-.detail-layout form {
-  border: 3px solid var(--color-secondary);
-  background-color: var(--color-creme);
-  color: var(--color-main);
-  padding: 1.8rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-.detail-layout form label {
-  margin-bottom: 0.3rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.detail-layout form input,
-.detail-layout form textarea,
-.detail-layout form select {
-  background-color: #fff;
-  border: 2px solid var(--color-secondary);
-  border-radius: 12px;
-  padding: 0.6rem 1rem;
-  font-family: inherit;
-  font-size: 1rem;
-  color: var(--color-main);
-  resize: vertical;
-  min-height: 40px;
-}
-
-.detail-layout form textarea {
-  min-height: 80px;
-  max-height: 160px;
-}
-
-/* --------------------------
-   Reacties
--------------------------- */
-#reacties {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-#reacties li {
-  background-color: #fff;
-  color: var(--color-main);
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-  line-height: 1.5;
-  word-wrap: break-word;
-}
-
-/* --------------------------
-   Loader
--------------------------- */
-.spinner {
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid var(--color-secondary);
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-#overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: none;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  border: none;
+  cursor: pointer;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
-.loader-circle {
-  width: 50px;
-  height: 50px;
-  border: 5px solid white;
-  border-top: 5px solid transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.searchButton img {
+  width: 1rem;
+  height: 1rem;
 }
 
-/* --------------------------
-   Success Popup
--------------------------- */
-#success-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  background: white;
-  border: 2px solid #4caf50;
-  border-radius: 1rem;
-  padding: 1.5rem 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  color: #4caf50;
-  font-weight: bold;
-  font-size: 1.2rem;
+/* ================================
+   RESPONSIVE DESKTOP STIJLEN
+================================== */
+@media screen and (min-width: 621px) {
+  .searchBox.open > .searchInput,
+  .searchBox.typing > .searchInput {
+    width: 240px; 
+  }
+
+  .searchInput {
+    width: 0; 
+    padding: 0;
+  }
+}
+
+/* ================================
+   BOEKEN LIJST
+================================== */
+.book-list {
+  display: grid;
+  grid-template-columns: 1fr; 
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Elke boek info kaart */
+.book-info {
+  display: flex;
+  gap: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  align-items: center;
+  padding: 1rem;
+  max-width: 100%;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.book-info.fade-out {
   opacity: 0;
+  transform: translateY(20px);
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 1100;
 }
 
-#success-popup.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
+/* Boek cover */
+.book-cover-link {
+  flex-shrink: 0;
+  width: 90px;
+  height: 130px;
+  overflow: hidden;
+  border-radius: 5px;
 }
 
-/* =========================
-   Responsiveness
-========================= */
-
-@media (min-width: 768px) {
-  .detail-layout {
-    flex-direction: row;
-    padding: 2.5rem 3.5rem;
-    gap: 2.5rem;
-    height: 100vh;
-  }
-
-  /* Herstel volgorde naar normaal */
-  .book-carrousel,
-  .left-column.detail-box,
-  .middle-column.detail-box {
-    order: 0;
-  }
-
-  .left-column.detail-box,
-  .middle-column.detail-box {
-    flex: 0 0 300px;
-    max-height: 85vh;
-  }
-
-  .book-carrousel {
-    flex: 1 1 auto;
-    max-height: 85vh;
-    padding: 2rem;
-    width: auto;
-  }
+.book-cover-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-@media (min-width: 1024px) {
-  .detail-layout {
-    padding: 3.5rem 5rem;
-    gap: 3.5rem;
-  }
-
-  .left-column.detail-box,
-  .middle-column.detail-box {
-    flex: 0 0 320px;
-    max-height: 90vh;
-  }
-
-  .book-carrousel {
-    max-height: 90vh;
-    padding: 2.5rem;
-  }
-
-  .slider-wrapper,
-  .slider-image {
-    max-height: 520px;
-  }
-
-  .carousel-button {
-    width: 3rem;
-    height: 3rem;
-    font-size: 1.6rem;
-  }
+/* Boek details */
+.book-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-@media (max-width: 480px) {
-  .detail-layout form {
-    padding: 1.2rem 1rem;
-  }
+.book-details h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.3rem 0;
+  color: #222;
+}
 
-  .detail-layout form button[type="submit"] {
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
-  }
+.book-details p {
+  margin: 0.15rem 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Magnetische boek knop */
+.book-button {
+  margin-top: 0.8rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-main);
+  color: var(--color-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  width: fit-content;
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.book-button:hover,
+.book-button:focus {
+  background-color: var(--color-secondary);
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.07);
 }
 
 
+/* ================================
+   DESKTOP LAYOUT (vanaf 900px)
+================================== */
+@media (min-width: 900px) {
+  .book-list {
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 4rem; 
+    max-width: 1200px;
+    width: 90%;
+  }
+
+  .book-info {
+    max-width: 100%;
+  }
+}
