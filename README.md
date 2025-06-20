@@ -51,13 +51,13 @@ https://github.com/user-attachments/assets/dfa55049-104d-4e0f-8db0-954203b11956
 
 https://github.com/user-attachments/assets/92b33e11-a98b-4bf2-87c1-8d56b674558a
 
-## 💻 Code & Data-verwerking
+## 💻 Code & Data-verwerking - Server.JS
 De server is opgezet met Node.js en Express, en verwerkt data via server-side rendering met Liquid.
 
 ### 🔄 Data ophalen & weergeven
 In server.js wordt de data opgehaald en weergegeven met behulp van app.get() routes en fetch() om JSON-data uit een externe database op te halen.
 
-💻 Code & Data-verwerking
+💻 Code & Data-verwerking 
 De applicatie is opgebouwd met Node.js, Express.js en LiquidJS als template engine. Data wordt opgehaald via externe API's en dynamisch gerenderd in Liquid-templates. Hieronder een overzicht van hoe de dataflow werkt.
 🔧 Setup
 
@@ -82,3 +82,98 @@ https://github.com/Keremttc/proof-of-concept/blob/3ba5a10c27ad6b79d01e41f656915f
 Gebruikers kunnen via een formulier een reactie achterlaten, die met een POST-verzoek naar de Directus API wordt gestuurd:
 
 https://github.com/Keremttc/proof-of-concept/blob/3ba5a10c27ad6b79d01e41f656915fa690673a70/server.js#L69-L91
+
+### Structuur en Functionaliteit - Catalogus.liquid
+
+## Weergave van Boekenlijst
+
+https://github.com/Keremttc/proof-of-concept/blob/deb58afd5b8e2a225a5cbd82ed2fa34d63913876/views/catalogus.liquid#L39-L54
+
+Doel: Dynamisch overzicht van alle boeken tonen met basisinformatie.
+
+Werking:
+
+- Door de Liquid {% for %}-loop wordt elk boek (data) uit de variabele algemeen doorlopen.
+
+- Per boek wordt een artikel gemaakt met een klikbare coverafbeelding en details zoals titel, uitgever, jaar en plaats.
+
+- Het gebruik van loading="lazy" bij afbeeldingen zorgt dat beelden pas geladen worden als ze in beeld komen, wat de laadtijd verbetert.
+
+Interactie:
+
+- De knop "Bekijk boek" linkt naar een detailpagina voor dat specifieke boek (/detail/{{ data.id }}).
+
+ ## Magnetische Hover Effecten op Knoppen
+
+ https://github.com/Keremttc/proof-of-concept/blob/deb58afd5b8e2a225a5cbd82ed2fa34d63913876/views/catalogus.liquid#L57-L81
+
+ Doel: Visueel aantrekkelijk effect geven aan de knoppen wanneer de gebruiker met de muis over een knop beweegt.
+
+Werking:
+
+- Voor elke knop met class .magnetic-button wordt een eventlistener toegevoegd op mousemove.
+
+- De knop beweegt lichtjes in de richting van de cursor en wordt iets vergroot (scale 1.05), waardoor het “magnetisch” lijkt te reageren.
+
+- Als de muis de knop verlaat (mouseleave), wordt de knop teruggezet naar zijn oorspronkelijke positie en grootte.
+
+- Gebruikservaring: Dit effect geeft de gebruiker een subtiele feedback en maakt de interface levendiger en interactiever.
+
+### Structuur en Functionaliteit - Detail.liquid
+
+## Boekinformatie
+
+https://github.com/Keremttc/proof-of-concept/blob/deb58afd5b8e2a225a5cbd82ed2fa34d63913876/views/detail.liquid#L6-L22
+
+Functie:
+
+- Laat dynamisch metadata van het geselecteerde boek zien.
+
+- Data zoals auteur, jaar, uitgever, status etc. worden eerst gecontroleerd op aanwezigheid.
+
+- De metadata array wordt via assign opgeslagen in md, zodat het overzichtelijk hergebruikt kan worden.
+
+## Reactieformulier + Reacties
+
+https://github.com/Keremttc/proof-of-concept/blob/deb58afd5b8e2a225a5cbd82ed2fa34d63913876/views/detail.liquid#L24-L43
+
+Functie:
+
+- Gebruikers kunnen naam, e-mail en een reactie invullen.
+
+- Deze worden via POST verstuurd naar de server (/detail/:id).
+
+- De reacties worden opgehaald via JavaScript vanuit een externe database (Directus API) en weergegeven in een <ul>-lijst.
+
+  ## Boekencarrousel
+
+  https://github.com/Keremttc/proof-of-concept/blob/deb58afd5b8e2a225a5cbd82ed2fa34d63913876/views/detail.liquid#L49-L51
+
+  Functie:
+
+- Toont meerdere afbeeldingen van het boek als een horizontale slider.
+
+- Navigatieknoppen prev en next schuiven door de slides.
+
+  https://github.com/Keremttc/proof-of-concept/blob/deb58afd5b8e2a225a5cbd82ed2fa34d63913876/views/detail.liquid#L149
+
+  Waarom?
+✓ Interactief bladeren door boekpagina’s of covers
+✓ Responsive: werkt op verschillende schermformaten
+
+⚙️ JavaScript Functionaliteit
+
+1. Reacties ophalen:
+   https://github.com/Keremttc/proof-of-concept/blob/deb58afd5b8e2a225a5cbd82ed2fa34d63913876/views/detail.liquid#L72
+  2. Reacties worden op basis van boek_{{ detail.id }} gefilterd en getoond.
+     https://github.com/Keremttc/proof-of-concept/blob/deb58afd5b8e2a225a5cbd82ed2fa34d63913876/views/detail.liquid#L107
+     3. Carousel logica:
+        https://github.com/Keremttc/proof-of-concept/blob/deb58afd5b8e2a225a5cbd82ed2fa34d63913876/views/detail.liquid#L153-L155
+
+        Waarom?
+✓ Vlotte UX door live laden van reacties
+✓ Geen herlaadmomenten
+✓ Mobiel en desktopgebruik worden ondersteund
+
+
+
