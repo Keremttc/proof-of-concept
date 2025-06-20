@@ -49,3 +49,4 @@ Op mobiel is gekozen voor een layout waarbij het boek als eerste getoond wordt, 
 https://github.com/user-attachments/assets/daae4ea4-b76f-4cba-80cc-e7bc4da1a5ca
 
 https://github.com/user-attachments/assets/daa80bee-9cc1-404d-9127-be1afd5a194a
+
