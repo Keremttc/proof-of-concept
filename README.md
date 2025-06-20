@@ -63,8 +63,15 @@ De pagina geeft gebruikers een verdiepend inzicht in het boek en maakt interacti
 
 ---
 
-[https://github.com/user-attachments/assets/dfa55049-104d-4e0f-8db0-954203b11956](https://github.com/user-attachments/assets/dfa55049-104d-4e0f-8db0-954203b11956)
-[https://github.com/user-attachments/assets/92b33e11-a98b-4bf2-87c1-8d56b674558a](https://github.com/user-attachments/assets/92b33e11-a98b-4bf2-87c1-8d56b674558a)
+
+https://github.com/user-attachments/assets/fca81667-ef43-4b86-8ad5-7dd4457fc789
+
+
+
+https://github.com/user-attachments/assets/a7cbfe5a-f265-4cfb-918c-9d3c9d4832f4
+
+
+
 
 ---
 
