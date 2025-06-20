@@ -183,6 +183,16 @@
   transform: scale(1.07);
 }
 
+.book-button:focus,
+.book-button:active,
+.searchButton:focus,
+.searchButton:active {
+  outline: none; 
+  background-color: var(--color-secondary); 
+  color: white; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.07);
+}
 
 /* ================================
    DESKTOP LAYOUT (vanaf 900px)
