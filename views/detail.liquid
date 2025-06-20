@@ -1,7 +1,25 @@
 {% render 'partials/head.liquid' %}
 {% render 'partials/nav.liquid' %}
 
+<!-- Open detail layout -->
 <div class="detail-layout">
+
+  <!-- Carrousel bovenaan -->
+  <section class="right-column book-carrousel detail-box" aria-label="Boek carrousel">
+    <div class="slider-container">
+      <div class="slider-wrapper">
+        {% for asset in detail.assets %}
+          <img src="{{ asset.medium }}" class="slider-image" alt="Boek afbeelding {{ forloop.index }}">
+        {% endfor %}
+      </div>
+    </div>
+    <div class="carousel-buttons">
+      <button class="carousel-button prev" aria-label="Vorige afbeelding">&lt;</button>
+      <button class="carousel-button next" aria-label="Volgende afbeelding">&gt;</button>
+    </div>
+  </section>
+  
+
   <!-- Linker kolom: Boek info -->
   <section class="left-column detail-box" aria-label="Boek informatie">
     <h1>Informatie</h1>
@@ -21,7 +39,7 @@
     {% if md[10] and md[10].value %}<h2>Status</h2><p>{{ md[10].value }}</p>{% endif %}
   </section>
 
-  <!-- Midden kolom: Reactie formulier + reacties -->
+  <!-- Reacties en formulier -->
   <section class="middle-column detail-box" aria-label="Reacties">
     <h2>Laat een reactie achter</h2>
     <form id="reactieForm" method="POST" action="/detail/{{ detail.id }}">
@@ -41,21 +59,9 @@
     <ul id="reacties" aria-live="polite"></ul>
   </section>
 
-  <!-- Rechter kolom: Carrousel -->
-  <section class="right-column book-carrousel detail-box" aria-label="Boek carrousel">
-    <div class="slider-container">
-      <button class="carousel-button prev" aria-label="Vorige afbeelding">&lt;</button>
-      <div class="slider-wrapper">
-        {% for asset in detail.assets %}
-          <img src="{{ asset.medium }}" class="slider-image" alt="Boek afbeelding {{ forloop.index }}">
-        {% endfor %}
-      </div>
-      <button class="carousel-button next" aria-label="Volgende afbeelding">&gt;</button>
-    </div>
-  </section>
-</div>
+</div> <!-- ✅ Sluit detail-layout pas hier -->
 
-<!-- Overlay en succesmelding -->
+<!-- Overlay en popup -->
 <div id="overlay" style="display:none;">
   <div class="blur-background"></div>
   <div class="loader-circle" aria-label="Bezig met verzenden"></div>
@@ -64,6 +70,7 @@
 <div id="success-popup" style="display:none;">✅ Reactie succesvol verzonden!</div>
 
 {% render 'partials/footer.liquid' %}
+
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
