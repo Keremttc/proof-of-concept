@@ -26,4 +26,4 @@ Deze keuzes zijn gemaakt met het oog op gebruiksvriendelijkheid, consistentie me
 <img width="220" alt="Image" src="https://github.com/user-attachments/assets/1d277faa-f180-4086-a1c6-ff17ddab2a55"/>
 
 
-
+c
