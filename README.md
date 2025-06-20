@@ -25,5 +25,27 @@ Deze keuzes zijn gemaakt met het oog op gebruiksvriendelijkheid, consistentie me
 
 <img width="220" alt="Image" src="https://github.com/user-attachments/assets/1d277faa-f180-4086-a1c6-ff17ddab2a55"/>
 
+## 📖 Detailpagina
+Wanneer je op een boek in de catalogus klikt, word je doorgestuurd naar de detailpagina.
+Op deze pagina vind je:
 
-c
+📚 Uitgebreide informatie over het geselecteerde boek (zoals titel, auteur, jaar en locatie)
+
+💬 De mogelijkheid om een reactie achter te laten over het boek
+
+🔄 Navigatieknoppen om door het boek te bladeren
+
+Deze pagina geeft gebruikers een verdiepend inzicht in het boek en maakt interactie mogelijk.
+
+💡 Ontwerpkeuzes
+De pagina is ontworpen met een duidelijke hiërarchie en rust in de layout:
+
+Op desktop staan het boek, de informatie en reacties naast elkaar, zodat alle belangrijke elementen direct zichtbaar zijn zonder te scrollen.
+
+Het boekformaat is bewust beperkt gehouden, om te voorkomen dat het te dominant wordt of lastig leesbaar is.
+
+Op mobiel is gekozen voor een layout waarbij het boek als eerste getoond wordt, omdat dit de kern is van de pagina. Daarna volgen de aanvullende gegevens en reacties. Zo komt de inhoud op een logische en gebruiksvriendelijke manier naar voren, passend bij het schermformaat.
+
+https://github.com/user-attachments/assets/daae4ea4-b76f-4cba-80cc-e7bc4da1a5ca
+
+https://github.com/user-attachments/assets/daa80bee-9cc1-404d-9127-be1afd5a194a
