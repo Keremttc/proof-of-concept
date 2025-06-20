@@ -46,7 +46,39 @@ Het boekformaat is bewust beperkt gehouden, om te voorkomen dat het te dominant 
 
 Op mobiel is gekozen voor een layout waarbij het boek als eerste getoond wordt, omdat dit de kern is van de pagina. Daarna volgen de aanvullende gegevens en reacties. Zo komt de inhoud op een logische en gebruiksvriendelijke manier naar voren, passend bij het schermformaat.
 
-https://github.com/user-attachments/assets/daae4ea4-b76f-4cba-80cc-e7bc4da1a5ca
 
-https://github.com/user-attachments/assets/daa80bee-9cc1-404d-9127-be1afd5a194a
+https://github.com/user-attachments/assets/dfa55049-104d-4e0f-8db0-954203b11956
 
+https://github.com/user-attachments/assets/92b33e11-a98b-4bf2-87c1-8d56b674558a
+
+## 💻 Code & Data-verwerking
+De server is opgezet met Node.js en Express, en verwerkt data via server-side rendering met Liquid.
+
+### 🔄 Data ophalen & weergeven
+In server.js wordt de data opgehaald en weergegeven met behulp van app.get() routes en fetch() om JSON-data uit een externe database op te halen.
+
+💻 Code & Data-verwerking
+De applicatie is opgebouwd met Node.js, Express.js en LiquidJS als template engine. Data wordt opgehaald via externe API's en dynamisch gerenderd in Liquid-templates. Hieronder een overzicht van hoe de dataflow werkt.
+🔧 Setup
+
+https://github.com/Keremttc/proof-of-concept/blob/3ba5a10c27ad6b79d01e41f656915fa690673a70/server.js#L1-L9
+
+📚 Cataloguspagina
+De hoofdpagina (/) toont een overzicht van alle boeken. De data wordt opgehaald uit een externe API en gerenderd met Liquid:
+
+https://github.com/Keremttc/proof-of-concept/blob/3ba5a10c27ad6b79d01e41f656915fa690673a70/server.js#L15-L20
+
+🔍 Zoekfunctionaliteit
+Gebruikers kunnen boeken zoeken via een POST-formulier. De resultaten worden gefilterd op basis van de ingevoerde zoekterm:
+
+https://github.com/Keremttc/proof-of-concept/blob/3ba5a10c27ad6b79d01e41f656915fa690673a70/server.js#L27-L37
+
+📖 Detailpagina per boek
+Bij het klikken op een boek word je doorgestuurd naar /detail/:id, waarbij het juiste boek wordt opgehaald met zijn ID. Ook worden eventuele reacties bij dat boek geladen.
+
+https://github.com/Keremttc/proof-of-concept/blob/3ba5a10c27ad6b79d01e41f656915fa690673a70/server.js#L49-L62
+
+💬 Reacties posten
+Gebruikers kunnen via een formulier een reactie achterlaten, die met een POST-verzoek naar de Directus API wordt gestuurd:
+
+https://github.com/Keremttc/proof-of-concept/blob/3ba5a10c27ad6b79d01e41f656915fa690673a70/server.js#L69-L91
