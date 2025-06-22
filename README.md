@@ -290,3 +290,14 @@ Gebruikservaring
 * ✔️ Live reacties laden zonder refresh
 * ✔️ Snelle en vloeiende gebruikerservaring
 * ✔️ Volledig mobielvriendelijk
+
+
+### 📚 Figma 
+
+Voor het ontwerp van de Online Catalogus heb ik mij laten inspireren door de bestaande website van Embassy of the Free Mind. De huidige visuele identiteit van het museum is vrij klassiek en intellectueel, met een sterke nadruk op historische kunst en cultuur. Die sfeer heb ik proberen te vertalen naar een moderne maar respectvolle interface.
+
+De kleuren die ik heb gebruikt donkerblauw, beige en goudaccenten  sluiten aan bij de bestaande huisstijl en zorgen voor een warme, vertrouwde uitstraling die past bij de doelgroep (voornamelijk oudere bezoekers en cultuurliefhebbers). Ook het gebruik van de hero-afbeelding bovenaan is een directe knipoog naar het huidige beeldmateriaal van het museum.
+
+Verder heb ik ervoor gekozen om de pagina mobile-first op te bouwen, met een duidelijk zoekveld en filtermogelijkheden die zowel op desktop als mobiel overzichtelijk gepresenteerd worden. Op die manier blijft de catalogus voor iedereen toegankelijk, ongeacht het apparaat.
+
+![image](https://github.com/user-attachments/assets/12bd7b03-0c55-4d7c-9905-7f9b790f09f7)
